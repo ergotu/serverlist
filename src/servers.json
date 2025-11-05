@@ -1,0 +1,41 @@
+{
+  "10.250.21.63:25565": {
+    "host": "10.250.21.63",
+    "port": 25565,
+    "game": "protocol-minecraftvanilla",
+    "series": "minecraft",
+    "friendlyName": "Minecraft Server",
+    "needsConnectString": false,
+    "icon": "https://i.chse.sh/p/serverlist/minecraft.png",
+    "password": false,
+    "gamedig": true,
+    "description": "Vanilla Minecraft server",
+    "priority": 1
+  },
+  "10.250.21.63:27015": {
+    "host": "10.250.21.63",
+    "port": 27015,
+    "game": "counterstrike2",
+    "series": "counterstrike",
+    "friendlyName": "CS2 Server",
+    "needsConnectString": true,
+    "icon": "https://i.chse.sh/p/serverlist/cs2.png",
+    "gamedig": true,
+    "password": false,
+    "description": "Counter-Strike 2 competitive server",
+    "priority": 2
+  },
+  "10.250.21.63:28960": {
+    "host": "10.250.21.63",
+    "port": 28960,
+    "game": "codmw2",
+    "series": "cod",
+    "friendlyName": "IW4x Server",
+    "needsConnectString": true,
+    "icon": "https://i.chse.sh/p/serverlist/mw2.png",
+    "gamedig": true,
+    "password": false,
+    "description": "Modern Warfare 2 multiplayer server",
+    "priority": 3
+  }
+}

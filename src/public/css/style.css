@@ -1,0 +1,161 @@
+:root {
+  /* Catppuccin Mocha color palette */
+  --ctp-base: #1e1e2e;
+  --ctp-mantle: #181825;
+  --ctp-crust: #11111b;
+  --ctp-surface0: #313244;
+  --ctp-surface1: #45475a;
+  --ctp-surface2: #585b70;
+  --ctp-overlay0: #6c7086;
+  --ctp-overlay1: #7f849c;
+  --ctp-overlay2: #9399b2;
+  --ctp-subtext0: #a6adc8;
+  --ctp-subtext1: #bac2de;
+  --ctp-text: #cdd6f4;
+  --ctp-lavender: #b4befe;
+  --ctp-blue: #89b4fa;
+  --ctp-sapphire: #74c7ec;
+  --ctp-sky: #89dceb;
+  --ctp-teal: #94e2d5;
+  --ctp-green: #a6e3a1;
+  --ctp-yellow: #f9e2af;
+  --ctp-peach: #fab387;
+  --ctp-maroon: #eba0ac;
+  --ctp-red: #f38ba8;
+  --ctp-mauve: #cba6f7;
+  --ctp-pink: #f5c2e7;
+  --ctp-flamingo: #f2cdcd;
+  --ctp-rosewater: #f5e0dc;
+}
+
+body {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5%;
+  background-color: var(--ctp-base);
+  color: var(--ctp-text);
+}
+
+label {
+  margin-right: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  word-break: normal !important;
+}
+
+tr,
+th {
+  background: var(--ctp-surface0) !important;
+  color: var(--ctp-text);
+}
+
+tr:nth-child(even) {
+  background: var(--ctp-surface1) !important;
+}
+
+tr:hover {
+  background: var(--ctp-surface2) !important;
+}
+
+th {
+  background: var(--ctp-mantle) !important;
+  border-bottom: 2px solid var(--ctp-surface2);
+}
+
+.icon-td {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+}
+
+.icon {
+  margin-bottom: 0;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.icon:last-of-type {
+  margin-right: 12px;
+}
+
+.hidden-row {
+  display: none;
+}
+
+.copy-button {
+  background-color: var(--ctp-blue);
+  color: var(--ctp-base);
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.copy-button:hover {
+  background-color: var(--ctp-sapphire);
+}
+
+.copy-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--ctp-green);
+  color: var(--ctp-base);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.copy-notification.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Offline server styling */
+.offline-server {
+  opacity: 0.5;
+  background-color: var(--ctp-surface0) !important;
+}
+
+.offline-server td {
+  color: var(--ctp-overlay1) !important;
+}
+
+.offline-indicator {
+  color: var(--ctp-red);
+  font-weight: bold;
+}
+
+.offline-server .copy-button {
+  background-color: var(--ctp-overlay0);
+  color: var(--ctp-overlay1);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.offline-server .copy-button:hover {
+  background-color: var(--ctp-overlay0);
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none;
+  }
+
+  body {
+    max-width: 100%;
+    padding: 1rem;
+  }
+}

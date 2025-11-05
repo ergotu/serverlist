@@ -1,0 +1,14 @@
+# Packages
+node_modules/
+
+# Private Data
+config.json
+.env
+*.db
+*.sqlite
+*.sqlite3
+.aider
+
+# Misc
+*.bak
+.DS_Store

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css">
+    <!-- <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css"> -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="https://i.chse.sh/p/serverlist/logo.png">
+    <title>Server List</title>
+</head>
+
+<body>
+    <h1>Server List</h1>
+    <div class="series-filter">
+        <input type="radio" id="filter-all" name="series-filter" value="all" checked>
+        <label for="filter-all">All</label>
+        <% 
+        const seriesLabels = {
+            minecraft: 'Minecraft',
+            counterstrike: 'Counter-Strike', 
+            cod: 'Call of Duty',
+            halo: 'Halo',
+            halflife: 'Half-Life',
+            teamfortress: 'Team Fortress',
+            garrysmod: "Garry's Mod",
+            insurgency: 'Insurgency',
+            quake: 'Quake'
+        };
+        %>
+        <% for (const series of availableSeries.sort()) { %>
+            <% if (seriesLabels[series]) { %>
+                <input type="radio" id="filter-<%= series %>" name="series-filter" value="<%= series %>" style="display: none;">
+                <label for="filter-<%= series %>" style="display: none;"><%= seriesLabels[series] %></label>
+            <% } %>
+        <% } %>
+    </div>
+    <hr>
+
+    <table id="serverTable">
+        <thead>
+            <tr>
+                <th>Server Name</th>
+                <th>Connection String</th>
+                <th>Players</th>
+                <th class="hidden-mobile">Map</th>
+                <th class="hidden-mobile">Game Type</th>
+                <th class="hidden-mobile mod-column">Mod</th>
+                <th class="hidden-mobile">Action</th>
+                <th class="hidden-row">Series</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const [serverName, serverInfo] of Object.entries(servers)) { %>
+            <tr id="row-<%= serverName.replace(/[^a-zA-Z0-9]/g, '_') %>" class="offline-server" onclick="copyRowConnectionString(this)">
+                <td class="icon-td">
+                    <img class="icon" alt="Game Icon" src="<%= serverInfo.icon %>" width="32" height="32">
+                    <% if (serverInfo.password) { %>
+                    <img class="icon" alt="Lock Icon" src="https://i.chse.sh/p/serverlist/lock.png" width="32"
+                        height="32" onclick="event.stopPropagation(); passwordPrompt(this)">
+                    <% } %>
+                    <%= serverInfo.friendlyName %>
+                </td>
+                <td id="connectString-<%= serverInfo.host %>:<%= serverInfo.port %>">
+                    <code>
+                      <%= serverInfo.manualConnectString 
+                          ? serverInfo.manualConnectString 
+                          : (serverInfo.needsConnectString ? 'connect ' : '') + serverInfo.host + ':' + serverInfo.port 
+                      %>
+                    </code>
+                </td>
+                <td><span class="offline-indicator">OFFLINE</span></td>
+                <td class="hidden-mobile"></td>
+                <td class="hidden-mobile"></td>
+                <td class="hidden-mobile mod-column"></td>
+                <td class="hidden-mobile"><button id="copyButton-<%= serverInfo.host %>:<%= serverInfo.port %>"
+                        class="copy-button"
+                        onclick="event.stopPropagation(); copyToClipboard(`${document.getElementById('connectString-<%= serverInfo.host %>:<%= serverInfo.port %>').textContent}`, this)">Copy
+                    </button>
+                </td>
+                <td class="hidden-row"><%= serverInfo.series %></td>
+                <td class="hidden-row"><%= serverInfo.game %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function ()
+        {
+            <% for (const [serverName, serverInfo] of Object.entries(servers))
+            { %>
+                registerServer('<%= serverInfo.host %>', '<%= serverInfo.port %>', '<%= serverInfo.game %>', '<%= serverName.replace(/[^a-zA-Z0-9]/g, '_') %>');
+                checkServerStatus('<%= serverInfo.host %>', '<%= serverInfo.port %>', '<%= serverInfo.game %>', '<%= serverName.replace(/[^a-zA-Z0-9]/g, '_') %>');
+            <% } %>
+        });
+    </script>
+</body>
+
+</html>

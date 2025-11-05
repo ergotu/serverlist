@@ -1,0 +1,44 @@
+{
+    "name": "server-list",
+    "version": "0.0.1",
+    "description": "A server list of my/friends Game Servers.",
+    "main": "./src/app.js",
+    "type": "module",
+    "scripts": {
+        "start": "bun ./src/app.js",
+        "dev": "LOG_LEVEL=debug bun --watch ./src/app.js",
+        "prod": "NODE_ENV=production bun ./src/app.js",
+        "lint": "npx @biomejs/biome format ./src",
+        "lint:fix": "npx @biomejs/biome format --write ./src",
+        "check": "npx @biomejs/biome check ./src",
+        "check:fix": "npx @biomejs/biome check --write ./src",
+        "validate-config": "bun -e \"import('./src/lib/configLoader.js').then(m => m.loadServerConfig())\"",
+        "test": "echo 'No tests yet' && exit 0",
+        "health-check": "curl -f http://localhost:3000/health || exit 1",
+        "postinstall": "bun2nix -o bun.nix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://git.chse.sh/chase/server-list.git"
+    },
+    "keywords": [],
+    "author": "Chase <c@chse.sh> (https://chse.sh)",
+    "contributors": [
+        ""
+    ],
+    "license": "AGPL-3.0-or-later",
+    "bugs": {
+        "url": "https://git.chse.sh/chase/server-list/issues"
+    },
+    "homepage": "https://git.chse.sh/chase/server-list#readme",
+    "dependencies": {
+        "apicache": "1.6.3",
+        "ejs": "3.1.10",
+        "express": "5.1.0",
+        "gamedig": "5.3.2",
+        "rcon": "1.1.0"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "2.3.3"
+    }
+}
